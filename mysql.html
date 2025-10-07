@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog DBMS & ERD - Post 1 & 2</title>
+  <meta name="description" content="Post 1: Tata cara instalasi MySQL + Video. Post 2: Apa itu atribut, entitas, dan relasi dalam ERD." />
+  <style>
+    :root{
+      --bg:#f6f8fb; --card:#ffffff; --accent:#2563eb; --muted:#6b7280;
+      --maxw:980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,#f8fbff 0%, #f6f8fb 100%); color:#0f172a;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      padding:40px 20px;
+    }
+    .container{max-width:var(--maxw); margin:0 auto;}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px;
+    }
+    .brand{display:flex; align-items:center; gap:12px;}
+    .logo{
+      width:52px; height:52px; border-radius:12px; background:linear-gradient(135deg,var(--accent), #7c3aed);
+      display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:18px;
+      box-shadow:0 6px 20px rgba(37,99,235,0.12);
+    }
+    nav a{color:var(--muted); text-decoration:none; margin-left:12px;}
+    main{display:grid; grid-template-columns: 1fr 320px; gap:24px;}
+    @media (max-width:900px){ main{grid-template-columns:1fr} .toc{order:2} }
+    .card{
+      background:var(--card); border-radius:12px; padding:20px; box-shadow:0 6px 18px rgba(15,23,42,0.06);
+    }
+    h1{margin:0; font-size:20px}
+    .subtitle{color:var(--muted); font-size:14px}
+    /* Post */
+    article{margin-bottom:18px}
+    article h2{margin:0 0 10px 0; font-size:18px; color:#0b1220}
+    article p{line-height:1.6; color:#263244}
+    .video-wrapper{position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px; background:#000}
+    .video-wrapper iframe{position:absolute; top:0;left:0;width:100%;height:100%; border:0}
+    pre{background:#0b1220;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto;font-size:13px}
+    code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Helvetica Neue", monospace}
+    .meta{font-size:13px;color:var(--muted); margin-bottom:12px}
+    .toc h3{margin-top:0}
+    .toc ul{padding-left:16px; margin:8px 0}
+    .erd-diagram{width:100%; height:auto; border-radius:8px; background:linear-gradient(180deg,#fff,#fbfdff); padding:12px}
+    footer{margin-top:30px;text-align:center;color:var(--muted);font-size:13px}
+    .btn {
+      display:inline-block;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;
+      background:var(--accent); color:white;
+    }
+    .small{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">DB</div>
+        <div>
+          <h1>Blog DBMS & ERD</h1>
+          <div class="subtitle">Post 1: Instalasi MySQL • Post 2: Atribut, Entitas, Relasi (ERD)</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#post1">Post 1</a>
+        <a href="#post2">Post 2</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Main content -->
+      <section>
+        <!-- Post 1 -->
+        <article id="post1" class="card">
+          <div class="meta">Kategori: Video & Tutorial • Dipost: 07 Oktober 2025</div>
+          <h2>Post 1 — Tata cara instalasi 1 DBMS (MySQL)</h2>
+          <p>Di bawah ini ada video tutorial (YouTube) yang sudah disematkan, lalu panduan langkah demi langkah singkat untuk instalasi MySQL pada sistem operasi Windows dan Linux (Ubuntu).</p>
+
+          <!-- Video embed menggunakan URL yang diberikan -->
+          <div style="margin:14px 0;" class="video-wrapper" aria-hidden="false">
+            <!-- Embed URL dibuat dari ID video: mv8WoAAgbo4 -->
+            <iframe src="https://www.youtube.com/embed/mv8WoAAgbo4?si=TwvIYNCU09pXjH_f" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <h3>Ringkasan langkah instalasi (Windows)</h3>
+          <ol>
+            <li>Download MySQL Installer dari situs resmi MySQL (pilih MySQL Installer for Windows).</li>
+            <li>Jalankan installer → pilih "Developer Default" atau "Server only" sesuai kebutuhan.</li>
+            <li>Ikuti wizard: pilih fitur (MySQL Server, Workbench, Shell), lalu Next → Install.</li>
+            <li>Set root password saat diminta. Catat username (root) dan password.</li>
+            <li>Set konfigurasi port (default 3306) dan pilih opsi Authentication (use strong password recommended).</li>
+            <li>Selesai — buka MySQL Workbench atau MySQL Shell, lalu koneksi ke server menggunakan root:3306.</li>
+          </ol>
+
+          <h3>Langkah singkat instalasi (Ubuntu / Debian)</h3>
+          <p>Jalankan perintah berikut di terminal (contoh untuk MySQL 8.x):</p>
+          <pre><code>sudo apt update
+sudo apt install mysql-server
+# secure installation (mengatur root password & opsi keamanan)
+sudo mysql_secure_installation
+# jalankan mysql shell
+sudo mysql -u root -p</code></pre>
+
+          <h3>Contoh membuat database dan user</h3>
+          <pre><code>-- login ke mysql lalu jalankan:
+CREATE DATABASE toko;
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'Passw0rd!';
+GRANT ALL PRIVILEGES ON toko.* TO 'admin'@'localhost';
+FLUSH PRIVILEGES;
+-- verify
+SHOW DATABASES;
+</code></pre>
+
+          <p class="small">Butuh file instalasi atau bantuan langkah demi langkah yang lebih detail (dengan screenshot)? Beri tahu saya dan saya buatkan versi lengkapnya.</p>
+        </article>
+
+        <!-- Post 2 -->
+        <article id="post2" class="card" style="margin-top:18px">
+          <div class="meta">Kategori: Post Blog/Web • Dipost: 07 Oktober 2025</div>
+          <h2>Post 2 — Apa itu atribut, entitas dan relasi dalam ERD?</h2>
+          <p>ERD (Entity-Relationship Diagram) adalah diagram yang digunakan untuk memodelkan struktur data dan hubungan antar entitas dalam sebuah sistem informasi. Berikut penjelasan dasar beserta contoh.</p>
+
+          <h3>Apa itu Entitas?</h3>
+          <p><strong>Entitas</strong> adalah objek nyata atau konsep yang datanya ingin disimpan. Contoh: <em>Mahasiswa</em>, <em>Dosen</em>, <em>MataKuliah</em>, <em>Pesanan</em>.</p>
+
+          <h3>Apa itu Atribut?</h3>
+          <p><strong>Atribut</strong> adalah informasi yang menggambarkan entitas. Contoh atribut untuk entitas <em>Mahasiswa</em>:
+            <ul>
+              <li><code>nim</code> (primary key)</li>
+              <li><code>nama</code></li>
+              <li><code>tanggal_lahir</code></li>
+              <li><code>email</code></li>
+            </ul>
+          </p>
+
+          <h3>Apa itu Relasi (Relationship)?</h3>
+          <p><strong>Relasi</strong> menunjukkan hubungan antara dua (atau lebih) entitas. Contoh: <em>Mahasiswa</em> <strong>mengambil</strong> <em>MataKuliah</em>. Relasi dapat memiliki kardinalitas:
+            <ul>
+              <li><strong>1:1</strong> (one-to-one)</li>
+              <li><strong>1:N</strong> (one-to-many)</li>
+              <li><strong>M:N</strong> (many-to-many) — biasa dipecah menjadi tabel/junction table.</li>
+            </ul>
+          </p>
+
+          <h3>Contoh ERD sederhana (Mahasiswa — MataKuliah)</h3>
+          <div class="erd-diagram" role="img" aria-label="Contoh ERD sederhana">
+            <!-- Simple SVG diagram -->
+            <svg width="100%" height="220" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
+              <!-- Entities -->
+              <rect x="30" y="40" rx="10" ry="10" width="240" height="110" fill="#fff" stroke="#c7d2fe" stroke-width="2"></rect>
+              <text x="150" y="70" font-size="16" font-weight="700" text-anchor="middle" fill="#0b1220">MAHASISWA</text>
+              <text x="70" y="95" font-size="13" fill="#263244">nim (PK)</text>
+              <text x="70" y="115" font-size="13" fill="#263244">nama</text>
+              <text x="70" y="135" font-size="13" fill="#263244">email</text>
+
+              <rect x="630" y="40" rx="10" ry="10" width="240" height="110" fill="#fff" stroke="#c7d2fe" stroke-width="2"></rect>
+              <text x="750" y="70" font-size="16" font-weight="700" text-anchor="middle" fill="#0b1220">MATAKULIAH</text>
+              <text x="660" y="95" font-size="13" fill="#263244">kode_mk (PK)</text>
+              <text x="660" y="115" font-size="13" fill="#263244">nama_mk</text>
+              <text x="660" y="135" font-size="13" fill="#263244">sks</text>
+
+              <!-- Relationship box -->
+              <rect x="350" y="80" rx="8" ry="8" width="200" height="50" fill="#fff" stroke="#a7f3d0" stroke-width="2"></rect>
+              <text x="450" y="110" font-size="15" font-weight="700" text-anchor="middle" fill="#065f46">MENGAMBIL</text>
+
+              <!-- Lines -->
+              <line x1="270" y1="100" x2="350" y2="100" stroke="#94a3b8" stroke-width="2"></line>
+              <line x1="550" y1="100" x2="630" y2="100" stroke="#94a3b8" stroke-width="2"></line>
+
+              <!-- Cardinalities -->
+              <text x="300" y="90" font-size="13" fill="#334155">1</text>
+              <text x="600" y="90" font-size="13" fill="#334155">N</text>
+            </svg>
+          </div>
+
+          <h3>Contoh tabel (relasi 1:N)</h3>
+          <p>Skema tabel sederhana:</p>
+          <pre><code>-- tabel mahasiswa
+CREATE TABLE mahasiswa (
+  nim VARCHAR(12) PRIMARY KEY,
+  nama VARCHAR(100),
+  email VARCHAR(100)
+);
+
+-- tabel matakuliah
+CREATE TABLE matakuliah (
+  kode_mk VARCHAR(10) PRIMARY KEY,
+  nama_mk VARCHAR(120),
+  sks INT
+);
+
+-- tabel penghubung (jika many-to-many) atau jika mahasiswa mengambil banyak MK,
+-- gunakan tabel nilai / mengambil:
+CREATE TABLE mengambil (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nim VARCHAR(12),
+  kode_mk VARCHAR(10),
+  semester VARCHAR(10),
+  nilai CHAR(2),
+  FOREIGN KEY (nim) REFERENCES mahasiswa(nim),
+  FOREIGN KEY (kode_mk) REFERENCES matakuliah(kode_mk)
+);</code></pre>
+
+          <p class="small">Catatan: Jika hubungan M:N, buat tabel penghubung seperti <code>mengambil</code> di atas.</p>
+        </article>
+      </section>
+
+      <!-- Sidebar / TOC -->
+      <aside class="toc card">
+        <h3>Daftar Isi</h3>
+        <ul>
+          <li><a href="#post1">Post 1 — Instalasi MySQL & Video</a></li>
+          <li><a href="#post2">Post 2 — Atribut, Entitas, Relasi (ERD)</a></li>
+        </ul>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid #eef2ff">
+
+        <h3>Download / Ekspor</h3>
+        <p class="small">Simpan halaman ini sebagai HTML atau gunakan sebagai template blog. Mau versi PDF / DOCX? Klik tombol di bawah.</p>
+        <p><a class="btn" href="#" onclick="window.print();return false;">Cetak / Simpan PDF</a></p>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid #eef2ff">
+        <h3>Kontak</h3>
+        <p class="small">Butuh konten tambahan, lebih banyak post, atau desain lain? Balas chat ini.</p>
+      </aside>
+    </main>
+
+    <footer class="small">
+      Dibuat otomatis — Blog tutorial DBMS & ERD • &copy; 2025
+    </footer>
+  </div>
+
+  <!-- Optional tiny script for smooth scroll -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const hash = a.getAttribute('href');
+        if(hash.startsWith('#')){
+          e.preventDefault();
+          const el = document.querySelector(hash);
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
